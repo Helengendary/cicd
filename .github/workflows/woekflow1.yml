@@ -1,0 +1,28 @@
+name: Deploy To Azure
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+      users: actions/checkout@v3
+      - name: Setup node.js version
+      users: actions/setup-node@v4
+      
+      with:
+        node-version: '20.x'
+
+      - name: Install Dependencies
+        run: npm install
+      - name: Deploy on Azure
+        run: azure/webapps-deploy@v2
+      
+      with:
+        app-name: Helenis
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE}}
+        package: ./pastas
