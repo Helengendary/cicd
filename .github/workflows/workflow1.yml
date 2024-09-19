@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: cd .\pastas\ && npm install
       - name: Deploy on Azure
-        run: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v2
         with:
           app-name: 'Helenis'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE}}
