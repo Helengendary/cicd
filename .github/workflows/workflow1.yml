@@ -10,19 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
-      users: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: Setup node.js version
-      users: actions/setup-node@v4
-      
-      with:
-        node-version: '20.x'
-
-      - name: Install Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
         run: cd pastas && npm install
       - name: Deploy on Azure
         run: azure/webapps-deploy@v2
-      
-      with:
-        app-name: Helenis
-        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE}}
-        package: ./pastas
+        with:
+          app-name: Helenis
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE}}
+          package: ./pastas
